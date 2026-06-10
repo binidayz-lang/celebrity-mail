@@ -110,15 +110,55 @@
 #cmg-wrap .tip-txt{font-size:12px;color:var(--text2);line-height:1.85}
 
 /* 모바일 최적화 */
-@media(max-width:480px){
+@media(max-width:600px){
   #cmg-wrap{padding:1rem .75rem 2.5rem}
-  #cmg-wrap .igrid{grid-template-columns:1fr}
-  #cmg-wrap .vgrid{grid-template-columns:1fr 1fr}
+
+  /* 헤더 */
+  #cmg-wrap .hd{flex-direction:column;gap:10px}
+  #cmg-wrap .hd-btns{flex-direction:row;align-items:center;width:100%}
+  #cmg-wrap .hd-btn{flex:1;text-align:center}
   #cmg-wrap .hd-title{font-size:18px}
+  #cmg-wrap .hd-sub{font-size:11px}
+
+  /* 입력 그리드 → 1열 */
+  #cmg-wrap .igrid{grid-template-columns:1fr}
+
+  /* 입력 행 → 세로 */
   #cmg-wrap .irow{flex-direction:column}
-  #cmg-wrap .irow .btn-p{width:100%}
+  #cmg-wrap .irow .btn-p{width:100%;padding:12px}
+
+  /* 입력창 폰트 16px (iOS 자동 줌 방지) */
   #cmg-wrap .tinput{font-size:16px}
-  #cmg-wrap .bbox{max-height:300px}
+  #cmg-wrap .subj-edit{font-size:16px}
+
+  /* 버전 탭 그리드 → 1열 */
+  #cmg-wrap .vgrid{grid-template-columns:1fr 1fr}
+  #cmg-wrap .vbtn{font-size:11px;padding:10px 4px}
+
+  /* 본문박스 높이 */
+  #cmg-wrap .bbox{max-height:280px;font-size:12px}
+
+  /* 복사 버튼 행 → 세로 */
+  #cmg-wrap .crow{flex-direction:column}
+  #cmg-wrap .btn-g,#cmg-wrap .btn-m{width:100%;padding:12px}
+
+  /* 매뉴얼 스텝카드 */
+  #cmg-wrap .mstep{padding:11px 12px;gap:10px}
+  #cmg-wrap .mnum{min-width:26px;height:26px;font-size:12px}
+  #cmg-wrap .mtit{font-size:12px}
+  #cmg-wrap .mdesc{font-size:11px}
+
+  /* 서명 미리보기 */
+  #cmg-wrap .sign-prev{font-size:11px}
+
+  /* 진행바 간격 */
+  #cmg-wrap .prog{gap:3px}
+
+  /* 결과 헤더 */
+  #cmg-wrap .res-hd{flex-direction:row;align-items:center}
+
+  /* 전체복사 버튼 강조 */
+  #cmg-wrap .btn-m{font-size:13px}
 }
 </style>
 
