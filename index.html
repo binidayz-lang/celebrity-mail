@@ -1,0 +1,557 @@
+<style>
+#cmg-wrap *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+#cmg-wrap{
+  --bg:#f7f6f3;--white:#fff;--border:#e4e2dc;--border2:#d0cec6;
+  --text:#1a1a18;--text2:#6b6860;--text3:#a8a59e;
+  --accent:#2a2a28;--accent2:#8b6f3e;
+  --success:#2e7d5a;--warn-bg:#fef9f0;--warn-bd:#f0d898;--warn-tx:#8b6232;
+  --r:10px;--rlg:14px;
+  position:relative;
+  font-family:-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif;
+  font-weight:300;
+  color:var(--text);
+  max-width:720px;
+  margin:0 auto;
+  padding:1.5rem 1rem 3rem;
+}
+
+/* 헤더 */
+#cmg-wrap .hd{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:1.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border)}
+#cmg-wrap .hd-tag{font-size:10px;letter-spacing:2.5px;color:var(--accent2);text-transform:uppercase;margin-bottom:5px;font-weight:500}
+#cmg-wrap .hd-title{font-size:20px;font-weight:700;color:var(--text);line-height:1.25}
+#cmg-wrap .hd-sub{font-size:11px;color:var(--text2);margin-top:4px;line-height:1.5}
+#cmg-wrap .hd-btns{display:flex;flex-direction:column;gap:5px;align-items:flex-end;flex-shrink:0}
+#cmg-wrap .hd-btn{font-size:11px;padding:6px 13px;border-radius:20px;border:1px solid var(--border2);background:var(--white);cursor:pointer;color:var(--text2);white-space:nowrap;font-family:inherit}
+#cmg-wrap .hd-btn.dark{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* 진행바 */
+#cmg-wrap .prog{display:flex;gap:4px;margin-bottom:1.5rem}
+#cmg-wrap .ps{flex:1;height:4px;border-radius:2px;background:var(--border);transition:background .3s}
+#cmg-wrap .ps.done{background:var(--accent)}
+#cmg-wrap .ps.active{background:var(--border2)}
+
+/* 카드 */
+#cmg-wrap .card{background:var(--white);border:1px solid var(--border);border-radius:var(--rlg);padding:1.25rem;margin-bottom:.75rem}
+#cmg-wrap .card-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+#cmg-wrap .clbl{font-size:10px;letter-spacing:2px;color:var(--accent2);text-transform:uppercase;font-weight:500}
+#cmg-wrap .hint{font-size:11px;color:var(--text3);margin-bottom:10px;line-height:1.6}
+
+/* 카테고리 */
+#cmg-wrap .cg{margin-bottom:12px}
+#cmg-wrap .cg-lbl{font-size:11px;color:var(--text3);margin-bottom:6px}
+#cmg-wrap .chips{display:flex;flex-wrap:wrap;gap:6px}
+#cmg-wrap .chip{font-size:12px;padding:7px 14px;border-radius:20px;border:1px solid var(--border2);background:var(--bg);cursor:pointer;color:var(--text2);font-family:inherit;transition:all .15s}
+#cmg-wrap .chip:hover,#cmg-wrap .chip.on{border-color:var(--accent2);color:var(--accent2);background:#fdf8f0}
+
+/* 입력 */
+#cmg-wrap .igrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+#cmg-wrap .ilbl{font-size:12px;color:var(--text2);margin-bottom:5px;font-weight:500}
+#cmg-wrap .irow{display:flex;gap:8px;margin-bottom:8px}
+#cmg-wrap .tinput{flex:1;padding:10px 13px;font-size:13px;background:var(--white);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:inherit;outline:none;transition:border .15s;width:100%;-webkit-appearance:none}
+#cmg-wrap .tinput:focus{border-color:var(--accent2)}
+#cmg-wrap .tinput::placeholder{color:var(--text3)}
+
+/* 버튼 */
+#cmg-wrap .btn-p{padding:11px 18px;font-size:13px;font-weight:500;background:var(--accent);color:#fff;border:none;border-radius:var(--r);cursor:pointer;font-family:inherit;white-space:nowrap;transition:opacity .15s}
+#cmg-wrap .btn-p:hover{opacity:.85}
+#cmg-wrap .btn-pf{width:100%;padding:12px;font-size:13px;font-weight:500;background:var(--accent);color:#fff;border:none;border-radius:var(--r);cursor:pointer;font-family:inherit;transition:opacity .15s;margin-top:4px}
+#cmg-wrap .btn-pf:hover{opacity:.85}
+#cmg-wrap .btn-bk{font-size:12px;color:var(--text3);background:none;border:1px solid var(--border);padding:5px 12px;border-radius:20px;cursor:pointer;font-family:inherit}
+#cmg-wrap .btn-bk:hover{color:var(--text2);border-color:var(--border2)}
+#cmg-wrap .btn-g{padding:10px;font-size:12px;border-radius:var(--r);border:1px solid var(--border);background:var(--white);cursor:pointer;color:var(--text2);font-family:inherit;flex:1;transition:all .15s}
+#cmg-wrap .btn-g:hover{border-color:var(--border2);color:var(--text)}
+#cmg-wrap .btn-m{padding:10px;font-size:13px;font-weight:500;border-radius:var(--r);background:var(--accent);border:none;cursor:pointer;color:#fff;font-family:inherit;flex:1;transition:opacity .15s}
+#cmg-wrap .btn-m:hover{opacity:.85}
+#cmg-wrap .btn-skip{width:100%;margin-top:8px;padding:10px;font-size:12px;border-radius:var(--r);border:1px solid var(--border);background:var(--bg);cursor:pointer;color:var(--text2);font-family:inherit}
+
+/* 서명 미리보기 */
+#cmg-wrap .sign-prev{background:var(--bg);border:1px solid var(--border);border-radius:var(--r);padding:11px 13px;font-size:12px;color:var(--text2);line-height:1.9;margin-bottom:14px}
+#cmg-wrap .sign-lbl{font-size:10px;letter-spacing:1px;color:var(--text3);text-transform:uppercase;margin-bottom:5px}
+
+/* 결과 */
+#cmg-wrap .res-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem}
+#cmg-wrap .res-badge{font-size:11px;letter-spacing:2px;color:var(--success);text-transform:uppercase;font-weight:500}
+#cmg-wrap .sec-lbl{font-size:10px;letter-spacing:2px;color:var(--accent2);text-transform:uppercase;font-weight:500;margin-bottom:8px;margin-top:1.25rem}
+#cmg-wrap .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:8px}
+#cmg-wrap .vbtn{padding:9px 6px;font-size:12px;border-radius:var(--r);border:1px solid var(--border);cursor:pointer;text-align:center;color:var(--text2);background:var(--white);font-family:inherit;line-height:1.5;transition:all .15s}
+#cmg-wrap .vbtn.on{background:#fdf8f0;border-color:var(--accent2);color:var(--accent);font-weight:500}
+#cmg-wrap .vbtn small{font-size:10px;font-weight:300;display:block;color:var(--text3)}
+#cmg-wrap .vbtn.on small{color:var(--accent2)}
+#cmg-wrap .dbox{padding:13px 14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r);font-size:13px;color:var(--text);line-height:1.6;word-break:keep-all;margin-bottom:4px}
+#cmg-wrap .subj-edit{width:100%;padding:13px 14px;background:var(--bg);border:1px solid var(--accent2);border-radius:var(--r);font-size:13px;color:var(--text);line-height:1.7;word-break:keep-all;word-wrap:break-word;margin-bottom:4px;resize:none;font-family:inherit;outline:none;overflow:hidden;min-height:56px;transition:border .15s}
+#cmg-wrap .subj-edit:focus{border-color:var(--accent);background:var(--white)}
+#cmg-wrap .edit-hint{font-size:11px;color:var(--accent2);margin-bottom:8px}
+#cmg-wrap .bbox{padding:13px 14px;background:var(--bg);border:1px solid var(--border);border-radius:var(--r);font-size:13px;color:var(--text);line-height:1.9;white-space:pre-wrap;max-height:380px;overflow-y:auto;margin-bottom:4px;-webkit-overflow-scrolling:touch}
+#cmg-wrap .ccount{font-size:11px;color:var(--text3);text-align:right;margin-bottom:12px}
+#cmg-wrap .notice{padding:10px 13px;background:var(--warn-bg);border:1px solid var(--warn-bd);border-radius:var(--r);font-size:12px;color:var(--warn-tx);line-height:1.6;margin-bottom:12px}
+#cmg-wrap .crow{display:flex;gap:6px}
+
+/* 섹션 */
+#cmg-wrap .sec{display:none}
+#cmg-wrap .sec.on{display:block}
+
+/* 패널 (모달 대신 인라인 패널) */
+#cmg-wrap .panel{display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--rlg);padding:1.5rem;margin-bottom:1rem}
+#cmg-wrap .panel.on{display:block}
+#cmg-wrap .mhd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+#cmg-wrap .mtitle{font-size:16px;font-weight:500;color:var(--text)}
+#cmg-wrap .mclose{font-size:22px;background:none;border:none;cursor:pointer;color:var(--text3);line-height:1;padding:0 4px;font-family:inherit}
+
+/* 매뉴얼 스텝카드 */
+#cmg-wrap .mstep{display:flex;gap:12px;align-items:flex-start;padding:13px 14px;background:var(--bg);border-radius:10px;border:1px solid var(--border);margin-bottom:8px}
+#cmg-wrap .mstep.warn{background:var(--warn-bg);border-color:var(--warn-bd)}
+#cmg-wrap .mnum{min-width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;flex-shrink:0}
+#cmg-wrap .mstep.warn .mnum{background:var(--accent2)}
+#cmg-wrap .mtit{font-size:13px;font-weight:500;color:var(--text);margin-bottom:4px}
+#cmg-wrap .mdesc{font-size:12px;color:var(--text2);line-height:1.75}
+#cmg-wrap .mtag{display:inline-block;background:var(--white);padding:1px 7px;border-radius:4px;border:1px solid var(--border);font-size:11px;margin:1px 2px}
+#cmg-wrap .tip-box{padding:12px 14px;background:var(--white);border:1px solid var(--border);border-radius:10px;margin-bottom:14px}
+#cmg-wrap .tip-lbl{font-size:10px;font-weight:500;color:var(--accent2);letter-spacing:1px;text-transform:uppercase;margin-bottom:7px}
+#cmg-wrap .tip-txt{font-size:12px;color:var(--text2);line-height:1.85}
+
+/* 모바일 최적화 */
+@media(max-width:480px){
+  #cmg-wrap{padding:1rem .75rem 2.5rem}
+  #cmg-wrap .igrid{grid-template-columns:1fr}
+  #cmg-wrap .vgrid{grid-template-columns:1fr 1fr}
+  #cmg-wrap .hd-title{font-size:18px}
+  #cmg-wrap .irow{flex-direction:column}
+  #cmg-wrap .irow .btn-p{width:100%}
+  #cmg-wrap .tinput{font-size:16px}
+  #cmg-wrap .bbox{max-height:300px}
+}
+</style>
+
+<div id="cmg-wrap">
+
+  <!-- 헤더 -->
+  <div class="hd">
+    <div>
+      <div class="hd-tag">Celebrity Mail Generator</div>
+      <div class="hd-title">입점제안 메일 생성기</div>
+      <div class="hd-sub">정보 입력 → 제목·본문 각 4가지 선택 → 복사</div>
+    </div>
+    <div class="hd-btns">
+      <button class="hd-btn dark" onclick="cmg.openManual()">? 사용법</button>
+      <button class="hd-btn" onclick="cmg.openAbout()">셀러브리티란? ↗</button>
+    </div>
+  </div>
+
+  <!-- 매뉴얼 패널 -->
+  <div class="panel" id="cmg-manual">
+    <div class="mhd">
+      <div class="mtitle">📋 사용 방법</div>
+      <button class="mclose" onclick="cmg.closeManual()">✕ 닫기</button>
+    </div>
+    <div style="font-size:12px;color:#a8a59e;margin-bottom:16px;line-height:1.5">처음 쓰시는 분도 3분이면 메일 완성! 순서대로 따라해 주세요 😊</div>
+    <div class="mstep"><div class="mnum">1</div><div><div class="mtit">내 정보 입력</div><div class="mdesc">• <b>이름</b>과 <b>직책</b>은 필수예요<br>• 직책은 <b>팀장 / 매니저 / 셀렉매니저</b> 등 직책명만 입력<br>• 카카오ID · 이메일은 선택 — 입력하면 서명에 자동 반영<br>• 서명 미리보기 확인 후 다음 눌러주세요</div></div></div>
+    <div class="mstep"><div class="mnum">2</div><div><div class="mtit">카테고리 선택</div><div class="mdesc">• 제안할 제품이 속하는 카테고리를 눌러주세요<br>• 선택하면 해당 카테고리 <b>실제 성과 수치</b>가 메일에 자동으로 들어가요</div></div></div>
+    <div class="mstep"><div class="mnum">3</div><div><div class="mtit">제품명 입력</div><div class="mdesc">• 제안할 제품 이름 전체를 입력해주세요<br>• 띄어쓰기 포함 그대로 입력<br>• 예) <span class="mtag">앱솔리 또또빵</span> <span class="mtag">제주 감귤 원액</span><br>• 전송 버튼 또는 <b>Enter</b>로 다음 단계</div></div></div>
+    <div class="mstep"><div class="mnum">4</div><div><div class="mtit">업체명 입력</div><div class="mdesc">• 제안하려는 브랜드·업체 이름 입력<br>• 모르면 <b>미정 버튼</b> 클릭 → 메일에 '귀사'로 표시</div></div></div>
+    <div class="mstep warn"><div class="mnum">5</div><div><div class="mtit">제품 특징 입력 <span style="font-size:11px;font-weight:300;color:var(--accent2)">(선택)</span></div><div class="mdesc">• 제품 핵심 특징을 한 줄로 간단히 입력<br>• 예) <span class="mtag">날개없는 무소음, 아이방용</span><br>• 없으면 <b>건너뛰기</b> 버튼 클릭</div></div></div>
+    <div class="mstep"><div class="mnum">6</div><div><div class="mtit">제목 + 본문 선택 후 복사</div><div class="mdesc">• 제목 4가지 중 선택 → 제목 복사<br>• 본문 4가지 중 선택 → 본문 복사<br>• 또는 <b>제목+본문 전체 복사</b>로 한 번에!<br>• 메일 앱에 붙여넣기 후 발송<br>• <span style="color:#c0392b;font-weight:500">⚠️ 입점제안서 + 판매 레퍼런스 파일 꼭 첨부!</span></div></div></div>
+    <div class="tip-box"><div class="tip-lbl">💡 TIP</div><div class="tip-txt">• B안 제안이유 먼저 / C안 임팩트 먼저 / D안 수치 강조 / E안 짧고 간결<br>• 처음엔 <b>B안이나 E안</b>이 읽기 편해요<br>• 발신자 정보는 매번 다시 입력해야 해요 (저장 기능 없음)<br>• 궁금한 점은 메리에게 문의해주세요 😊</div></div>
+    <button class="btn-pf" onclick="cmg.closeManual()">확인했어요!</button>
+  </div>
+
+  <!-- 소개 패널 -->
+  <div class="panel" id="cmg-about">
+    <div class="mhd">
+      <div class="mtitle">셀러브리티란?</div>
+      <button class="mclose" onclick="cmg.closeAbout()">✕ 닫기</button>
+    </div>
+    <div style="font-size:13px;color:var(--text);line-height:1.9;white-space:pre-wrap" id="cmg-aboutTxt"></div>
+    <button class="btn-pf" onclick="cmg.closeAbout()" style="margin-top:16px">닫기</button>
+  </div>
+
+  <!-- 진행바 -->
+  <div class="prog">
+    <div class="ps active" id="cmg-ps0"></div>
+    <div class="ps" id="cmg-ps1"></div>
+    <div class="ps" id="cmg-ps2"></div>
+    <div class="ps" id="cmg-ps3"></div>
+    <div class="ps" id="cmg-ps4"></div>
+    <div class="ps" id="cmg-ps5"></div>
+  </div>
+
+  <!-- Step 0: 발신자 -->
+  <div class="sec on" id="cmg-sec0">
+    <div class="card">
+      <div class="clbl" style="margin-bottom:14px">Step 01 — 내 정보 입력</div>
+      <div class="igrid">
+        <div><div class="ilbl">이름 *</div><input class="tinput" id="cmg-name" type="text" placeholder="예) 박아름" oninput="cmg.updSign()"></div>
+        <div><div class="ilbl">직책 *</div><input class="tinput" id="cmg-role" type="text" placeholder="예) 팀장, 매니저" oninput="cmg.updSign()"></div>
+      </div>
+      <div class="igrid">
+        <div><div class="ilbl">카카오 ID</div><input class="tinput" id="cmg-kakao" type="text" placeholder="예) marryz" oninput="cmg.updSign()"></div>
+        <div><div class="ilbl">이메일</div><input class="tinput" id="cmg-email" type="email" placeholder="예) abc@kakao.com" oninput="cmg.updSign()"></div>
+      </div>
+      <div class="sign-lbl">서명 미리보기</div>
+      <div class="sign-prev" id="cmg-signPrev">(주)셀러브리티 제품셀렉팀 [이름] [직책]<br>Kakao id : [카카오ID]&nbsp;&nbsp;|&nbsp;&nbsp;e-mail : [이메일]</div>
+      <button class="btn-pf" onclick="cmg.goStep1()">다음 →</button>
+    </div>
+  </div>
+
+  <!-- Step 1: 카테고리 -->
+  <div class="sec" id="cmg-sec1">
+    <div class="card">
+      <div class="card-hd">
+        <div class="clbl">Step 02 — 카테고리 선택</div>
+        <button class="btn-bk" onclick="cmg.goStep(0)">← 이전</button>
+      </div>
+      <div id="cmg-catWrap"></div>
+    </div>
+  </div>
+
+  <!-- Step 2: 제품명 -->
+  <div class="sec" id="cmg-sec2">
+    <div class="card">
+      <div class="card-hd">
+        <div class="clbl">Step 03 — 제품명 입력</div>
+        <button class="btn-bk" onclick="cmg.goStep(1)">← 이전</button>
+      </div>
+      <div class="hint">띄어쓰기 포함해서 전부 입력 후 전송 버튼 누르세요</div>
+      <div class="irow">
+        <input class="tinput" id="cmg-prod" type="text" placeholder="예) 앱솔리 또또빵, 제주 감귤 원액" onkeydown="if(event.key==='Enter'){event.preventDefault();cmg.goProd();}">
+        <button class="btn-p" onclick="cmg.goProd()">전송 →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 3: 업체명 -->
+  <div class="sec" id="cmg-sec3">
+    <div class="card">
+      <div class="card-hd">
+        <div class="clbl">Step 04 — 업체명 입력</div>
+        <button class="btn-bk" onclick="cmg.goStep(2)">← 이전</button>
+      </div>
+      <div class="irow">
+        <input class="tinput" id="cmg-comp" type="text" placeholder="예) ○○식품 (모르면 '미정')" onkeydown="if(event.key==='Enter'){event.preventDefault();cmg.goComp();}">
+        <button class="btn-p" onclick="cmg.goComp()">완성 →</button>
+      </div>
+      <div class="chips" style="margin-top:10px">
+        <button class="chip" onclick="document.getElementById('cmg-comp').value='미정';cmg.goComp()">미정</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Step 4: 제품 특징 -->
+  <div class="sec" id="cmg-sec4">
+    <div class="card">
+      <div class="card-hd">
+        <div class="clbl">Step 05 — 제품 특징 <span style="font-size:10px;font-weight:300;color:var(--text3)">(선택)</span></div>
+        <button class="btn-bk" onclick="cmg.goStep(3)">← 이전</button>
+      </div>
+      <div class="hint">제품의 핵심 특징을 한 줄로 입력해주세요. 본문에 자연스럽게 녹아들어요.</div>
+      <div class="irow">
+        <input class="tinput" id="cmg-feat" type="text" placeholder="예) 날개없는 무소음, 아이방용 / 유기농, 무첨가" onkeydown="if(event.key==='Enter'){event.preventDefault();cmg.goFeat();}">
+        <button class="btn-p" onclick="cmg.goFeat()">다음 →</button>
+      </div>
+      <button class="btn-skip" onclick="document.getElementById('cmg-feat').value='';cmg.goFeat()">특징 없이 건너뛰기 →</button>
+    </div>
+  </div>
+
+  <!-- Step 5: 결과 -->
+  <div class="sec" id="cmg-sec5">
+    <div class="res-hd">
+      <div class="res-badge">✓ 메일 완성!</div>
+      <button class="btn-bk" onclick="cmg.goStep(0)">↺ 다시 만들기</button>
+    </div>
+
+    <div class="sec-lbl">제목 선택 (4가지)</div>
+    <div class="vgrid" id="cmg-subjTabs"></div>
+    <div class="edit-hint">✏️ 제목을 직접 수정할 수 있어요</div>
+    <textarea class="subj-edit" id="cmg-subjDisp" rows="3" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+    <button class="btn-g" id="cmg-cSubj" onclick="cmg.cpSubj()" style="width:100%;margin-bottom:1.25rem">제목 복사</button>
+
+    <div class="sec-lbl">본문 선택 (4가지)</div>
+    <div class="vgrid" id="cmg-bodyTabs"></div>
+    <div class="bbox" id="cmg-bodyDisp"></div>
+    <div class="ccount" id="cmg-ccount"></div>
+
+    <div class="notice">📎 보낼 때 입점제안서 + 판매 레퍼런스 파일 꼭 첨부하세요!</div>
+    <div class="crow">
+      <button class="btn-g" id="cmg-cBody" onclick="cmg.cpBody()">본문 복사</button>
+      <button class="btn-m" id="cmg-cAll" onclick="cmg.cpAll()">📋 제목+본문 전체 복사</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+const CATS={'🍱 식품':['일반식품','건강기능식품'],'👶 유아동':['육아용품','유아동용품','영유아식품'],'🏠 생활':['생활용품','주방용품','생활가전','인테리어·리빙'],'💄 뷰티':['뷰티/기초화장품'],'👗 패션':['패션/잡화'],'🐾 반려동물':['반려동물']};
+const STAT={
+  '일반식품':{stat:'공구 성사 342건 / 회차당 평균 판매량 3,150개 / 고객 재구매율 82.4%',note:'재구매 유도형 구조로 한 번 구매한 고객이 지속 재구매하는 패턴이 강합니다.',infl:'신선하고 맛있는 식품을'},
+  '건강기능식품':{stat:'공구 성사 342건 / 회차당 평균 판매량 3,150개 / 고객 재구매율 82.4%',note:'건강 관련 제품은 신뢰 기반 구매가 핵심으로, 저희 셀러들의 팬덤 기반 전환율이 특히 강점입니다.',infl:'믿을 수 있는 건강기능식품을'},
+  '육아용품':{stat:'공구 성사 218건 / 회차당 평균 판매량 2,450개 / 구매 전환율 11.8%',note:'엄마 팬덤 셀러들이 두텁게 형성되어 있어 고관여 상품임에도 업계 평균을 크게 웃도는 전환율을 보여주고 있습니다.',infl:'육아에 꼭 필요한 안심 용품을'},
+  '유아동용품':{stat:'공구 성사 218건 / 회차당 평균 판매량 2,450개 / 구매 전환율 11.8%',note:'주 20~40대 엄마 팬덤이 두텁게 형성되어 있어 유아동 제품의 구매 전환율이 업계 평균을 크게 웃돌고 있습니다.',infl:'아이들을 위한 안전하고 좋은 제품을'},
+  '영유아식품':{stat:'공구 성사 218건 / 회차당 평균 판매량 2,450개 / 고객 재구매율 82.4%',note:'엄마 팬덤의 높은 재구매 성향이 영유아 식품 카테고리에서도 강하게 나타나고 있습니다.',infl:'아이에게 안심하고 먹일 수 있는 식품을'},
+  '생활용품':{stat:'공구 성사 186건 / 회차당 평균 판매량 2,850개 / 단일 브랜드 최고 누적 매출 8,540만원',note:'1차 공구 오픈 3시간 만에 초도 물량이 전량 품절된 사례가 있을 정도로 구매력이 검증되어 있습니다.',infl:'일상을 편리하게 해주는 생활용품을'},
+  '주방용품':{stat:'공구 성사 186건 / 회차당 평균 판매량 2,850개 / 단일 브랜드 최고 누적 매출 8,540만원',note:'살림·요리 콘텐츠 셀러들이 활발히 활동 중으로 주방용품의 실구매 전환이 매우 강합니다.',infl:'주방을 더 스마트하게 만들어줄 제품을'},
+  '생활가전':{stat:'공구 성사 186건 / 회차당 평균 판매량 2,850개 / 단일 브랜드 최고 매출 8,540만원',note:'소형 생활가전은 리뷰 콘텐츠와 결합했을 때 전환율이 높아지는 카테고리입니다.',infl:'생활을 더 편리하게 해주는 가전제품을'},
+  '인테리어·리빙':{stat:'공구 성사 186건 / 회차당 평균 판매량 2,850개 / 단일 브랜드 최고 매출 8,540만원',note:'라이프스타일 콘텐츠 셀러들과의 협업 시 브랜드 노출과 판매 전환이 동시에 이루어집니다.',infl:'공간을 더 아름답게 만들어줄 리빙 제품을'},
+  '뷰티/기초화장품':{stat:'공구 성사 295건 / 회차당 평균 판매량 1,780개 / 카테고리 평균 공구 매출 3,820만원',note:'비포&애프터 숏츠 콘텐츠로 구성된 전문 리뷰형 셀러들이 높은 구매 전환율을 만들어내고 있습니다.',infl:'품질 좋은 뷰티·스킨케어 제품을'},
+  '패션/잡화':{stat:'플랫폼 최고 전환율 15.4% / 평균 공구 매출 1,500~3,500만원',note:'20~40대 여성 팬덤이 두텁게 형성되어 있어 패션·잡화 제품의 원활한 공구 진행이 가능합니다.',infl:'트렌디한 패션·잡화 제품을'},
+  '반려동물':{stat:'플랫폼 최고 전환율 15.4% / 셀러 수요가 높은 성장 카테고리',note:'반려동물 카테고리는 저희 셀러들 사이에서 수요가 높아 좋은 제품이라면 빠른 매칭이 가능합니다.',infl:'반려동물을 위한 제품을'}
+};
+const SINF=[['버전1','기존형식 + 제품명'],['버전2','임팩트형'],['버전3','입점제안형'],['버전4','셀러가 찾는형']];
+const BINF=[['B안','제안이유 먼저'],['C안','임팩트 먼저'],['D안','수치 강조형'],['E안','간결형']];
+const ABOUT=`(주)셀러브리티는 '셀럽과 브랜드를 연결하다'는 슬로건 아래 운영되는 공동구매 커머스 플랫폼입니다.
+
+📌 핵심 특징
+• 5년 차 법인벤더사 / 4,000여 명 인플루언서 보유
+• 폐쇄몰(시크릿 링크) 운영 — 외부 가격 노출 없음
+• 입점비·광고비·선결제 비용 전혀 없음
+• 성과 기준 정산 (팔리지 않으면 비용 없음)
+
+📊 플랫폼 실적
+• 최고 구매 전환율 15.4% (일반 SNS 광고 대비 7배+)
+• 평균 공구 매출 1,500~3,500만원 / 상위 공구 8,500만원+
+• 생활용품 단일 브랜드 4차 완판 — 누적 8,540만원
+
+🔄 진행 프로세스
+1. 입점 신청 → 3일 이내 담당자 확인
+2. 전자계약서 작성
+3. 입점사 어드민 제공 (상품 등록)
+4. 전문 MD가 인플루언서 직접 매칭·컨텍
+5. 공구 진행 (콘텐츠·운영·CS 전담)
+6. 배송 완료 후 영업일 3일 이내 자동 정산
+
+🛡️ 3대 파트너 보장
+• 브랜드 가격선 보호 (가격비교 사이트 노출 차단)
+• 업무 리소스 Zero — 인플루언서 섭외·계약·CS 100% 대행
+• 100% 투명 성과 정산 — 실시간 대시보드 제공
+
+📧 문의: luckqii22@naver.com
+🌐 벤더몰: https://celeb.celebrity.place/`;
+
+let ST={name:'',role:'',kakao:'',email:'',cat:'',prod:'',comp:'',feat:'',subjs:[],bodies:[],si:0,bi:0};
+
+// 카테고리 렌더
+const cw=document.getElementById('cmg-catWrap');
+Object.entries(CATS).forEach(([g,items])=>{
+  const d=document.createElement('div');d.className='cg';
+  const l=document.createElement('div');l.className='cg-lbl';l.textContent=g;d.appendChild(l);
+  const c=document.createElement('div');c.className='chips';
+  items.forEach(it=>{const b=document.createElement('button');b.className='chip';b.textContent=it;b.onclick=()=>cmg.selCat(it);c.appendChild(b);});
+  d.appendChild(c);cw.appendChild(d);
+});
+document.getElementById('cmg-aboutTxt').textContent=ABOUT;
+
+window.cmg={
+  updSign(){
+    const n=document.getElementById('cmg-name').value||'[이름]';
+    const r=document.getElementById('cmg-role').value||'[직책]';
+    const k=document.getElementById('cmg-kakao').value||'[카카오ID]';
+    const e=document.getElementById('cmg-email').value||'[이메일]';
+    document.getElementById('cmg-signPrev').innerHTML=`(주)셀러브리티 제품셀렉팀 ${n} ${r}<br>Kakao id : ${k}&nbsp;&nbsp;|&nbsp;&nbsp;e-mail : ${e}`;
+  },
+  goStep(n){
+    for(let i=0;i<6;i++){
+      const s=document.getElementById('cmg-sec'+i);
+      if(s) s.className='sec'+(i===n?' on':'');
+      const p=document.getElementById('cmg-ps'+i);
+      if(p) p.className='ps'+(i<n?' done':i===n?' active':'');
+    }
+    window.scrollTo({top:document.getElementById('cmg-wrap').offsetTop-20,behavior:'smooth'});
+  },
+  goStep1(){
+    const n=document.getElementById('cmg-name').value.trim();
+    const r=document.getElementById('cmg-role').value.trim();
+    if(!n||!r){alert('이름과 직책은 필수입니다!');return;}
+    ST.name=n;ST.role=r;
+    ST.kakao=document.getElementById('cmg-kakao').value.trim();
+    ST.email=document.getElementById('cmg-email').value.trim();
+    this.goStep(1);
+  },
+  selCat(cat){ST.cat=cat;this.goStep(2);},
+  goProd(){
+    const v=document.getElementById('cmg-prod').value.trim();
+    if(!v){document.getElementById('cmg-prod').focus();return;}
+    ST.prod=v;this.goStep(3);
+  },
+  goComp(){
+    const v=document.getElementById('cmg-comp').value.trim();
+    if(!v){document.getElementById('cmg-comp').focus();return;}
+    ST.comp=v==='미정'?'귀사':v;this.goStep(4);
+  },
+  goFeat(){
+    ST.feat=document.getElementById('cmg-feat').value.trim();
+    this.build();this.goStep(5);
+  },
+  sign(){
+    const k=ST.kakao?`Kakao id : ${ST.kakao}  |  `:'';
+    const e=ST.email?`e-mail : ${ST.email}`:'';
+    return `---\n(주)셀러브리티 제품셀렉팀 ${ST.name} ${ST.role}${k||e?'\n'+k+e:''}`;
+  },
+  subjs(){
+    const {cat,prod}=ST;
+    return[
+      `4000여명의 셀러들의 공동구매 5년차 법인벤더사 (주)셀러브리티에서 '${prod}' 협업제안을 드립니다!`,
+      `광고비 0원, 4000명 셀러와 함께 — '${prod}' 공동구매 협업 제안드립니다`,
+      `[입점제안] '${prod}' 공동구매 협업을 제안드립니다 — (주)셀러브리티`,
+      `지금 저희 셀러들이 찾고 있습니다 — '${prod}' 공동구매 협업 제안`
+    ];
+  },
+  bodies(){
+    const {cat,prod,comp,feat}=ST;
+    const cd=STAT[cat];const pn=`'${prod}'`;const sg=this.sign();
+    const ft=feat?` 특히 ${feat} 제품이라 저희 셀러분들 고객들에게 딱 맞겠다 싶어서 연락드리게 되었습니다.`:'';
+    const ft2=feat?` ${feat} 제품이라 저희 고객분들께 잘 맞을 것 같아 연락드리게 되었습니다.`:'';
+    const ft3=feat?` ${feat} 제품이라 저희 셀러분들께서 좋아하실 것 같아 연락드리게 되었습니다.`:'';
+    return[
+`안녕하세요.
+(주)셀러브리티 제품셀렉팀 ${ST.name} ${ST.role}이라고 합니다.
+
+요즘 저희 인플루언서분들 사이에서 ${cd.infl} 찾는 분들이 많아, ${comp}의 ${pn}을(를) 함께 소개드리고 싶어 연락드리게 되었습니다.${ft}
+갑작스러운 메일 연락 먼저 양해 부탁드립니다.
+
+저희 (주)셀러브리티는 5년 차 법인벤더사로 4,000여 명의 인플루언서를 보유하고 있으며, 폐쇄몰 형태의 자사몰을 운영하고 있습니다.
+
+협업 시 ${pn}을(를) 저희 몰에 직접 입점하여 모든 셀러에게 노출되며, 전문 MD가 제품에 맞는 인플루언서를 직접 컨텍하고 공구 전 과정을 1:1로 관리합니다. 입점 수수료는 없으며, CS 역시 저희가 직접 진행합니다.
+
+현재 저희 플랫폼 인플루언서 정보는 아래와 같습니다.
+- 팔로워 1만 ~ 10만 이상 (소통이 원활한 실구매 전환형)
+- 평균 매출 100만 원 ~ n천만 원 / 1회 진행 후 n차 공구 지속
+- 주 20~40대 여성 팬덤 (육아 / 살림 / 먹거리 / 뷰티 / 반려동물 등)
+
+${cat} 카테고리 최근 6개월 실적: ${cd.stat}
+${cd.note}
+
+지금도 수많은 업체의 협업 요청을 받고 계시겠지만,
+무엇보다도 정산에 있어서 문제가 없어야 하며,
+실제로 매출을 낼 수 있는 인플루언서들을 케어하고 있는지,
+과정들이 함께 공유되고 있는지 — 이 부분이 가장 중요하다고 생각합니다.
+
+5년 차 법인 벤더사 (주)셀러브리티는 그 부분에 있어서 이미 모든 준비가 되어 있다고 자신 있게 말씀드립니다.
+
+※ 현재 함께하고 있는 인플루언서분들 정보는 입점 전에는 공유해드리기 어렵습니다. 단, 입점 후 ${pn} 매칭이 진행될 때는 진행하는 인플루언서 정보를 모두 함께 공유해드리고 있습니다.
+
+첨부드린 입점제안서와 판매 레퍼런스도 확인해 주시면 감사하겠습니다.
+긍정적인 회신 부탁드립니다!
+
+https://celeb.celebrity.place/
+
+${sg}`,
+
+`안녕하세요.
+(주)셀러브리티 제품셀렉팀 ${ST.name} ${ST.role}이라고 합니다.
+
+${cat} 카테고리 최근 6개월 실적: ${cd.stat}
+${cd.note}
+
+저희는 5년 차 법인벤더사로 4,000여 명의 인플루언서를 보유하고 있으며, 전문 MD가 ${pn} 분석부터 인플루언서 매칭, 공구 운영, CS, 정산까지 전 과정을 관리합니다. 입점비·광고비·선결제 비용은 전혀 없습니다.
+
+현재 저희 플랫폼 인플루언서 정보는 아래와 같습니다.
+- 팔로워 1만 ~ 10만 이상 (소통이 원활한 실구매 전환형)
+- 평균 매출 100만 원 ~ n천만 원 / 1회 진행 후 n차 공구 지속
+- 주 20~40대 여성 팬덤 (육아 / 살림 / 먹거리 / 뷰티 / 반려동물 등)
+
+${comp}의 ${pn}을(를) ${cd.infl} 찾는 셀러들과 연결해드리고 싶어 연락드렸습니다.${ft2}
+갑작스러운 메일 양해 부탁드립니다.
+
+5년 차 벤더사로서 정산 투명성, 인플루언서 케어, 전 과정 공유 — 이 세 가지에 있어서 자신 있게 말씀드릴 수 있습니다.
+
+※ 현재 함께하고 있는 인플루언서분들 정보는 입점 전에는 공유해드리기 어렵습니다. 단, 입점 후 ${pn} 매칭이 진행될 때는 진행하는 인플루언서 정보를 모두 함께 공유해드리고 있습니다.
+
+첨부드린 입점제안서와 판매 레퍼런스도 함께 보내드리니 한번 살펴봐 주시면 감사하겠습니다.
+꼭 좋은 기회가 되어 저희 인플루언서분들께도 ${pn}을(를) 선보일 수 있었으면 좋겠습니다!
+
+https://celeb.celebrity.place/
+
+${sg}`,
+
+`안녕하세요.
+(주)셀러브리티 제품셀렉팀 ${ST.name} ${ST.role}입니다.
+갑작스러운 메일 먼저 양해 부탁드립니다.
+
+${comp}의 ${pn}에 관심이 생겨 연락드리게 되었습니다.${feat?' '+feat+' 제품이라 저희 셀러분들 고객들에게 딱 맞겠다 싶었습니다.':''}
+
+저희 셀러브리티는 5년 차 법인벤더사로, 현재 아래와 같은 실적을 보유하고 있습니다.
+
+📊 ${cat} 카테고리 최근 6개월 실적
+${cd.stat}
+
+이 수치는 일반 SNS 광고 전환율(0.5~1%) 대비 7배 이상 높은 수준으로, 저희 플랫폼 인플루언서들의 실구매 전환력이 검증된 결과입니다.
+
+저희와 협업하시게 되면
+✓ 전문 MD가 ${pn}에 맞는 인플루언서를 직접 매칭해드리고
+✓ 공구 기획·콘텐츠·CS·정산까지 저희가 전담합니다
+✓ 입점비·광고비·선결제 비용은 없으며 성과가 났을 때만 정산됩니다
+✓ 4,000여 명 인플루언서, 주 20~40대 여성 팬덤
+
+※ 현재 함께하고 있는 인플루언서분들 정보는 입점 전에는 공유해드리기 어렵습니다. 단, 입점 후 매칭이 진행될 때는 모든 정보를 함께 공유해드리고 있습니다.
+
+입점제안서와 판매 레퍼런스도 함께 보내드리니 확인해 주시면 감사하겠습니다.
+긍정적인 회신 주시면 정말 좋겠습니다!
+
+https://celeb.celebrity.place/
+
+${sg}`,
+
+`안녕하세요.
+(주)셀러브리티 제품셀렉팀 ${ST.name} ${ST.role}입니다.
+갑작스러운 메일 먼저 양해 부탁드립니다.
+
+저희 플랫폼 인플루언서들 사이에서 ${cd.infl} 요청이 많아, ${comp}의 ${pn}을(를) 소개드리고 싶어 연락드렸습니다.${ft3}
+
+저희 셀러브리티는 5년 차 법인벤더사로 4,000여 명의 인플루언서 네트워크를 보유하고 있습니다. 전문 MD가 제품에 맞는 인플루언서를 직접 매칭하고 공구 전 과정을 관리하며, 입점비·광고비는 전혀 없습니다.
+
+${cat} 카테고리 실적: ${cd.stat}
+
+✓ 팔로워 1만 ~ 10만 이상의 실구매 전환형 셀러
+✓ 주 20~40대 여성 팬덤 / n차 공구 지속형 구조
+✓ CS·정산 모두 저희가 직접 진행
+✓ 입점 후 매칭 인플루언서 정보 전체 공유
+
+첨부드린 입점제안서와 판매 레퍼런스도 함께 보내드립니다.
+좋은 기회 되었으면 합니다!
+
+https://celeb.celebrity.place/
+
+${sg}`
+    ];
+  },
+  build(){
+    ST.subjs=this.subjs();ST.bodies=this.bodies();ST.si=0;ST.bi=0;
+    const st=document.getElementById('cmg-subjTabs');st.innerHTML='';
+    SINF.forEach(([t1,t2],i)=>{const b=document.createElement('button');b.className='vbtn'+(i===0?' on':'');b.innerHTML=`${t1}<small>${t2}</small>`;b.onclick=()=>this.selS(i);st.appendChild(b);});
+    const bt=document.getElementById('cmg-bodyTabs');bt.innerHTML='';
+    BINF.forEach(([t1,t2],i)=>{const b=document.createElement('button');b.className='vbtn'+(i===0?' on':'');b.innerHTML=`${t1}<small>${t2}</small>`;b.onclick=()=>this.selB(i);bt.appendChild(b);});
+    this.updS();this.updB();
+  },
+  selS(i){ST.si=i;document.querySelectorAll('#cmg-subjTabs .vbtn').forEach((b,idx)=>b.className='vbtn'+(idx===i?' on':''));this.updS();},
+  selB(i){ST.bi=i;document.querySelectorAll('#cmg-bodyTabs .vbtn').forEach((b,idx)=>b.className='vbtn'+(idx===i?' on':''));this.updB();},
+  updS(){
+    const el=document.getElementById('cmg-subjDisp');
+    el.value=ST.subjs[ST.si];
+    el.style.height='auto';
+    setTimeout(()=>{el.style.height=el.scrollHeight+'px';},0);
+  },
+  updB(){const b=ST.bodies[ST.bi];document.getElementById('cmg-bodyDisp').textContent=b;document.getElementById('cmg-ccount').textContent=`공백 제외 ${b.replace(/\n| /g,'').length}자`;},
+  cp(text,id,lbl){navigator.clipboard.writeText(text).then(()=>{const b=document.getElementById(id);b.textContent='✓ 복사됐어요!';setTimeout(()=>b.textContent=lbl,2000);});},
+  cpSubj(){const v=document.getElementById('cmg-subjDisp').value;this.cp(v,'cmg-cSubj','제목 복사');},
+  cpBody(){this.cp(ST.bodies[ST.bi],'cmg-cBody','본문 복사');},
+  cpAll(){const sv=document.getElementById('cmg-subjDisp').value;this.cp(`[제목]\n${sv}\n\n[본문]\n${ST.bodies[ST.bi]}`,'cmg-cAll','📋 제목+본문 전체 복사');},
+  openManual(){
+    const p=document.getElementById('cmg-manual');
+    const isOn=p.classList.contains('on');
+    document.getElementById('cmg-about').classList.remove('on');
+    if(!isOn){p.classList.add('on');setTimeout(()=>{p.scrollIntoView({behavior:'smooth',block:'start'});},50);}
+    else{p.classList.remove('on');}
+  },
+  closeManual(){document.getElementById('cmg-manual').classList.remove('on');document.getElementById('cmg-manual').scrollIntoView({behavior:'smooth',block:'start'});window.scrollTo({top:document.getElementById('cmg-wrap').offsetTop-20,behavior:'smooth'});},
+  openAbout(){
+    const p=document.getElementById('cmg-about');
+    const isOn=p.classList.contains('on');
+    document.getElementById('cmg-manual').classList.remove('on');
+    if(!isOn){p.classList.add('on');setTimeout(()=>{p.scrollIntoView({behavior:'smooth',block:'start'});},50);}
+    else{p.classList.remove('on');}
+  },
+  closeAbout(){document.getElementById('cmg-about').classList.remove('on');window.scrollTo({top:document.getElementById('cmg-wrap').offsetTop-20,behavior:'smooth'});}
+};
+
+
+})();
+</script>
