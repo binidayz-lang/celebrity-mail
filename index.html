@@ -570,7 +570,24 @@ ${sg}`
     setTimeout(()=>{el.style.height=el.scrollHeight+'px';},0);
   },
   updB(){const b=ST.bodies[ST.bi];document.getElementById('cmg-bodyDisp').textContent=b;document.getElementById('cmg-ccount').textContent=`공백 제외 ${b.replace(/\n| /g,'').length}자`;},
-  cp(text,id,lbl){navigator.clipboard.writeText(text).then(()=>{const b=document.getElementById(id);b.textContent='✓ 복사됐어요!';setTimeout(()=>b.textContent=lbl,2000);});},
+  cp(text,id,lbl){
+    try{
+      const ta=document.createElement('textarea');
+      ta.value=text;
+      ta.style.cssText='position:fixed;top:-9999px;left:-9999px;opacity:0;';
+      document.body.appendChild(ta);
+      ta.focus();ta.select();
+      const ok=document.execCommand('copy');
+      document.body.removeChild(ta);
+      const b=document.getElementById(id);
+      if(ok){b.textContent='✓ 복사됐어요!';setTimeout(()=>b.textContent=lbl,2000);}
+      else{b.textContent='⚠ 직접 복사해주세요';setTimeout(()=>b.textContent=lbl,2500);}
+    }catch(e){
+      const b=document.getElementById(id);
+      b.textContent='⚠ 직접 복사해주세요';
+      setTimeout(()=>b.textContent=lbl,2500);
+    }
+  },
   cpSubj(){const v=document.getElementById('cmg-subjDisp').value;this.cp(v,'cmg-cSubj','제목 복사');},
   cpBody(){const bv=document.getElementById('cmg-bodyDisp').textContent;this.cp(bv,'cmg-cBody','본문 복사');},
   cpAll(){const sv=document.getElementById('cmg-subjDisp').value;const bv=document.getElementById('cmg-bodyDisp').textContent;this.cp(`[제목]\n${sv}\n\n[본문]\n${bv}`,'cmg-cAll','📋 제목+본문 전체 복사');},
